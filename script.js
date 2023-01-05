@@ -54,6 +54,7 @@ imageArray.sort(() => 0.5 - Math.random());
 //console.log(imageArray);
 
 let cardChoosen = [];
+const cardWon = [];
 
 const gridDisplay = document.getElementById("grid");
 
@@ -80,7 +81,7 @@ function flipCard() {
   //   console.log(cardId)
   this.setAttribute("src", imageArray[cardId].image);
   // console.log(imageArray[cardId].name);
-   console.log(cardChoosen)
+   //console.log(cardChoosen)
 
   if (cardChoosen.length === 2) {
     //checkMatch();
@@ -95,11 +96,17 @@ function checkMatch() {
   const cards = document.querySelectorAll('img');
   // console.log('optionOne', optionOne.name);
   // console.log('optionTwo',optionTwo)
- 
+  if (optionOne.id === optionTwo.id) {
+    alert("You can not select the same card twice");
+    cards[optionOne.id].setAttribute("src", "images/question.jpeg");
+  }
   //chceck if two card matching
-  if (optionOne.name === optionTwo.name) {
+  else if (optionOne.name === optionTwo.name) {
     cards[optionOne.id].setAttribute('src', 'images/tick.png');
     cards[optionTwo.id].setAttribute("src", "images/tick.png");
+    cardWon.push(cardChoosen);
+
+    console.log(cardWon)
 
      cards[optionOne.id].removeEventListener("click", flipCard);
      cards[optionTwo.id].removeEventListener("click", flipCard);
